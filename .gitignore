@@ -1,0 +1,8 @@
+.claude/
+fix_*.js
+fix_*.py
+full_s8_rebuild.py
+inject_s15.py
+patch_*.py
+rebuild_s8.py
+rewind_s3.py
