@@ -149,13 +149,24 @@ section {
 /* â”€â”€ GLOBAL EYEBROW LABEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .eyebrow {
   font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--lime);
-  opacity: .7;
+  color: var(--mid);
+  opacity: 1;
   display: inline-block;
+}
+#s7 .eyebrow,
+#s6a .eyebrow,
+#s6b .eyebrow,
+#s6d .eyebrow,
+#s11 .eyebrow,
+#s12 .eyebrow,
+#s13 .eyebrow,
+#s15 .eyebrow,
+#s16 .eyebrow {
+  color: var(--lime);
 }
 
 /* â”€â”€ GLOBAL SECTION HEADING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -433,7 +444,7 @@ section {
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #s3 {
   background: var(--cream);
-  min-height: max(520vh, 3200px);
+  min-height: max(760vh, 5000px);
   overflow: visible;
 }
 #s3-sticky {
@@ -521,16 +532,22 @@ section {
 #s4 {
   background: var(--black);
   min-height: 100vh;
-  padding: 120px 56px;
+  padding: 96px 56px 110px;
   display: flex;
   align-items: center;
 }
 .research-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
+  grid-template-columns: 1fr;
+  gap: 46px;
   align-items: start;
+}
+.research-left {
+  display: grid;
+  grid-template-columns: minmax(280px, .72fr) minmax(320px, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: end;
 }
 .research-left .s-heading { color: var(--cream); margin: 16px 0 32px; }
 .research-left p {
@@ -541,16 +558,18 @@ section {
   max-width: 320px;
 }
 .research-methods {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 .method-item {
   border-top: 1px solid rgba(248,243,232,.08);
-  padding: 32px 0;
+  background: rgba(248,243,232,.025);
+  border-radius: 18px;
+  padding: 24px;
   display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 24px;
+  grid-template-columns: 38px 1fr;
+  gap: 18px;
   align-items: start;
 }
 .method-num {
@@ -1007,32 +1026,37 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0d0f0d;
+  background: transparent;
   overflow: hidden;
 }
 .s8-panel {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 56px;
-  padding: 60px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: clamp(28px, 4vw, 60px);
+  padding: 207px clamp(42px, 6vw, 80px) 60px;
   opacity: 0;
   pointer-events: none;
 }
 /* panel visibility controlled entirely by JS */
 .s8-panel-img {
   flex-shrink: 0;
-  width: clamp(220px, 24vw, 320px);
-  aspect-ratio: 9/16;
-  border-radius: 24px;
+  width: clamp(360px, 48vw, 620px);
+  aspect-ratio: 16/10;
+  border-radius: 18px;
   overflow: hidden;
-  background: #111;
-  box-shadow: 0 40px 120px rgba(0,0,0,.75), 0 0 0 1px rgba(248,243,232,.07);
+  background: transparent;
+  box-shadow: 0 28px 90px rgba(0,0,0,.36), 0 0 0 1px rgba(248,243,232,.07);
 }
-.s8-panel-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.s8-panel-text { max-width: 380px; }
+.s8-panel-img img { width: 100%; height: 100%; object-fit: contain; display: block; background: rgba(248,243,232,.035); }
+.s8-panel-text {
+  max-width: 320px;
+  align-self: flex-start;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .s8-panel-eyebrow {
   font-family: 'Poppins', sans-serif;
   font-size: 10px;
@@ -1055,6 +1079,298 @@ section {
   font-size: clamp(13px, 1.05vw, 15px);
   line-height: 1.85;
   color: rgba(248,243,232,.5);
+}
+
+/* S6A / S6B — Ideation and testing inserts */
+#s6a, #s6b {
+  background: var(--dark);
+  min-height: 100vh;
+  padding: 100px 56px;
+  color: var(--cream);
+}
+.insert-section-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.insert-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  margin-bottom: 56px;
+}
+.insert-section-head .s-heading {
+  color: var(--cream);
+  margin-top: 16px;
+}
+.insert-section-copy {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  line-height: 1.8;
+  color: rgba(248,243,232,.56);
+  max-width: 430px;
+}
+.idea-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+}
+.idea-card, .testing-card {
+  border: 1px solid rgba(248,243,232,.1);
+  background: rgba(248,243,232,.035);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.testing-card {
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+.idea-card {
+  display: grid;
+  grid-template-columns: minmax(360px, .95fr) minmax(280px, .72fr);
+  column-gap: clamp(26px, 4vw, 52px);
+  align-items: start;
+}
+.idea-card > .idea-placeholder,
+.idea-card > .case-image {
+  grid-row: span 2;
+  margin-bottom: 0;
+}
+.idea-placeholder, .case-placeholder {
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  border: 1px dashed rgba(203,253,133,.34);
+  background: rgba(203,253,133,.045);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(203,253,133,.62);
+  margin-bottom: 22px;
+}
+.case-placeholder {
+  min-height: 180px;
+  margin-bottom: 0;
+}
+.case-image {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+  display: block;
+  border-radius: 18px;
+  border: 1px solid rgba(248,243,232,.1);
+  background: rgba(248,243,232,.035);
+}
+.case-image.light {
+  border-color: rgba(14,42,28,.12);
+  background: rgba(14,42,28,.035);
+}
+.idea-image-crop {
+  height: 338px;
+  object-fit: cover;
+  object-position: center 48%;
+}
+.research-image-grid {
+  order: -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0 0 34px;
+  grid-column: 1 / -1;
+}
+.research-image-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  border: 1px solid rgba(248,243,232,.08);
+  background: rgba(248,243,232,.035);
+}
+.idea-title, .testing-title {
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.08;
+  margin-bottom: 12px;
+}
+.idea-card .idea-title {
+  margin-top: 4px;
+}
+.idea-body, .testing-body {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(16px, 1.12vw, 19px);
+  line-height: 1.68;
+  color: rgba(248,243,232,.5);
+}
+.testing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+  justify-content: start;
+}
+.testing-evidence-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  margin: 34px 0 0;
+  max-width: none;
+}
+.testing-charts {
+  display: grid;
+  grid-template-columns: minmax(260px, .85fr) 1fr;
+  gap: 48px;
+  align-items: center;
+  margin: 56px 0;
+}
+.chart-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 18px;
+}
+.demo-chart {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+.demo-pie {
+  width: 220px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(#cbfd85 0 61.5%, #7eab55 61.5% 88.4%, rgba(248,243,232,.45) 88.4% 96.1%, rgba(248,243,232,.18) 96.1% 100%);
+  box-shadow: inset 0 0 0 1px rgba(248,243,232,.08);
+}
+.chart-legend {
+  display: grid;
+  gap: 12px;
+}
+.chart-legend-row {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: rgba(248,243,232,.64);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.bar-chart {
+  display: grid;
+  gap: 18px;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 185px 1fr 52px;
+  gap: 14px;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: rgba(248,243,232,.68);
+}
+.bar-track {
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(248,243,232,.09);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lime);
+}
+.chart-note {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14px,1.1vw,16px);
+  line-height: 1.8;
+  color: rgba(248,243,232,.58);
+  max-width: 760px;
+}
+#s6c {
+  min-height: 100vh;
+}
+.experience-head {
+  display: grid !important;
+  grid-template-columns: minmax(280px, .7fr) minmax(360px, 1fr);
+  align-items: end !important;
+}
+.experience-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr) !important;
+  gap: 22px !important;
+  align-items: start;
+}
+.experience-primary {
+  grid-row: span 2;
+}
+.experience-grid .case-image,
+.experience-grid .case-placeholder {
+  width: 100%;
+  min-height: 0;
+}
+.experience-grid .case-placeholder {
+  aspect-ratio: 16 / 9;
+}
+.experience-grid .case-image {
+  object-fit: contain;
+}
+.experience-figure {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.experience-caption {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(14,42,28,.52);
+}
+.testing-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+.testing-list div {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(248,243,232,.62);
+  padding-left: 18px;
+  position: relative;
+}
+.testing-list div::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  position: absolute;
+  left: 0;
+  top: .55em;
+}
+
+@media (max-width: 900px) {
+  .insert-section-head, .idea-grid, .idea-card, .testing-grid, .testing-evidence-grid, .testing-charts, .demo-chart, .experience-head, .experience-grid, .research-grid, .research-image-grid { grid-template-columns: 1fr !important; display: grid; }
+  .s8-panel { flex-direction: column; align-items: flex-start; justify-content: center; }
+  .s8-panel-img { width: min(100%, 620px); }
+  .s8-panel-text { align-self: flex-start; margin-bottom: 0; }
 }
 
 /* S8 responsive — stack vertically on narrow screens */
@@ -1098,12 +1414,14 @@ section {
 <nav id="nav">
   <div class="nav-brand"><strong>SLAY</strong> × CDM × METROCITY</div>
   <ul class="nav-links">
+    <li><a href="#s2">Overview</a></li>
     <li><a href="#s4">Research</a></li>
-    <li><a href="#s5">Who</a></li>
-    <li><a href="#s8">Design</a></li>
-    <li><a href="#s11">Demo</a></li>
+    <li><a href="#s6a">Ideation</a></li>
+    <li><a href="#s6b">Testing</a></li>
+    <li><a href="#s6">Product</a></li>
+    <li><a href="#s6c">Flow</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})">Try Demo</button>
+  <button class="nav-cta" onclick="document.getElementById('s6c').scrollIntoView({behavior:'smooth'})">See Flow</button>
 </nav>
 
 <!-- â•â• S1 CHAOS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
@@ -1118,10 +1436,6 @@ section {
     </div>
     <div id="decrypt-title"></div>
   </div>
-  <div id="hero-meta">
-    <div class="project-name">Trash Talk with Rumi</div>
-    <div class="project-sub">Slay × CDM × MetroCity — 2024</div>
-  </div>
   <div id="hero-scroll-hint">
     <div class="scroll-line"></div>
     <span>Scroll</span>
@@ -1134,7 +1448,7 @@ section {
     <div class="context-left">
       <span class="eyebrow">00 — Overview</span>
       <h1 class="project-title">Trash Talk<br/><em>with Rumi</em></h1>
-      <p class="context-desc">An AI-powered waste-sorting kiosk that scans items, identifies material composition, and guides users to the correct bin — in real time. Built for public spaces. Designed to change habits, not just inform.</p>
+      <p class="context-desc">A community-facing waste sorting activity that combines an AI character, real-time item recognition, physical sorting, and public engagement. Designed as a pop-up learning installation, it helps people act with confidence at the moment of disposal.</p>
       <div class="context-tags">
         <span class="tag">Product Design</span>
         <span class="tag">AI Interaction</span>
@@ -1146,7 +1460,7 @@ section {
     <div class="context-right">
       <div class="meta-item"><div class="meta-label">Client</div><div class="meta-value">MetroCity × CDM</div></div>
       <div class="meta-item"><div class="meta-label">Team</div><div class="meta-value">Slay (4 members)</div></div>
-      <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">10 weeks<br/>Fall 2024</div></div>
+      <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">10 weeks<br/>Winter 2026</div></div>
       <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Product Designer<br/>UX Researcher</div></div>
       <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Figma, Three.js<br/>Gemini API</div></div>
       <div class="meta-item"><div class="meta-label">Deliverables</div><div class="meta-value">Kiosk UI, AI Demo<br/>Motion System</div></div>
@@ -1173,44 +1487,32 @@ section {
     <div class="research-left">
       <span class="eyebrow">02 — Research</span>
       <h2 class="s-heading">How we<br/>found it.</h2>
-      <p>Three methods. One consistent finding: the system, not the person, is broken.</p>
     </div>
     <div class="research-methods">
       <div class="method-item">
         <div class="method-num">01</div>
         <div>
           <div class="method-title">Field Study</div>
-          <div class="method-body">Observed UBC campus and CDM waste rooms. Found bins with no labels, misleading signage, and items abandoned beside bins rather than sorted.</div>
-          <div class="method-findings">
-            <div class="finding">CDM waste room: majority of bins unlabelled</div>
-            <div class="finding">Food court users showed intent but no guidance</div>
-            <div class="finding">Scattered items = decision paralysis, not laziness</div>
-          </div>
+          <div class="method-body">Observed UBC and CDM waste areas. Unlabelled bins, unclear signage, and abandoned items showed that users had intent, but lacked guidance.</div>
         </div>
       </div>
       <div class="method-item">
         <div class="method-num">02</div>
         <div>
           <div class="method-title">Interviews + Survey</div>
-          <div class="method-body">Targeted young adults (18–30) across UBC and CDM on recycling habits, knowledge gaps, and BC-specific sorting rules.</div>
-          <div class="method-findings">
-            <div class="finding">Most participants couldn't name 3 BC recycling rules</div>
-            <div class="finding">"Wishcycling" — putting items in Recycle hoping for the best</div>
-            <div class="finding">Gen Z actively rejects campaign-style eco-messaging</div>
-          </div>
+          <div class="method-body">Asked young adults about recycling habits and confidence. Most cared about sustainability, but felt unsure about what belonged in each bin.</div>
         </div>
       </div>
       <div class="method-item">
         <div class="method-num">03</div>
         <div>
           <div class="method-title">Secondary Research</div>
-          <div class="method-body">Studied global models: Germany (65% recycle rate), Japan AI bin systems, Vancouver's 2040 Zero Waste target vs. reality.</div>
-          <div class="method-findings">
-            <div class="finding">Food waste still #1 landfill source despite 2015 ban</div>
-            <div class="finding">Shared principle: reduce friction, add immediate feedback</div>
-            <div class="finding">Japan AI bins: image recognition + reward = proven model</div>
-          </div>
+          <div class="method-body">Reviewed local policies and global sorting examples. Strong systems reduced friction, used clear guidance, and gave immediate feedback.</div>
         </div>
+      </div>
+      <div class="research-image-grid">
+        <img src="assets/case-study/field-study-cdm.png" alt="CDM waste room field study"/>
+        <img src="assets/case-study/field-study-ubc.png" alt="UBC campus field study"/>
       </div>
     </div>
   </div>
@@ -1220,7 +1522,7 @@ section {
 <section id="s5">
   <div class="who-header">
     <span class="eyebrow">03 — Users</span>
-    <h2 class="s-heading">Who throws<br/><em>this away?</em></h2>
+    <h2 class="s-heading">Who are<br/><em>our users?</em></h2>
   </div>
   <div class="personas-row">
     <div class="persona-card">
@@ -1265,20 +1567,121 @@ section {
   </div>
 </section>
 
+<!-- S6A IDEATION -->
+<section id="s6a">
+  <div class="insert-section-inner">
+    <div class="insert-section-head">
+      <div>
+        <span class="eyebrow s6a-el">04 — Ideation</span>
+        <h2 class="s-heading s6a-el">Three Ideas</h2>
+        <p class="insert-section-copy s6a-el" style="margin-top:24px">Before committing to the kiosk interaction, we explored different ways to make recycling guidance feel immediate, visible, and low effort.</p>
+      </div>
+    </div>
+    <div class="idea-grid">
+      <div class="idea-card s6a-el">
+        <img class="case-image" src="assets/case-study/idea-game-vision.png" alt="Game-based sorting concept reference"/>
+        <div class="idea-title">Idea 01: Interactive Game-Based Sorting Experience</div>
+        <div class="idea-body">A gamified concept that turns waste sorting into a quick challenge. Users learn recycling rules through playful decision-making, scoring, and feedback. This direction explored whether game mechanics could make sustainability education more engaging for young adults.</div>
+      </div>
+      <div class="idea-card s6a-el">
+        <img class="case-image idea-image-crop" src="assets/case-study/mobile-sorting-guide.png" alt="Mobile sorting guide digital tool concept"/>
+        <div class="idea-title">Idea 02: Mobile Sorting Guide / Digital Tool</div>
+        <div class="idea-body">A mobile-first concept that helps users look up sorting rules and receive guidance through a digital interface. This direction focused on accessibility and convenience, but risked becoming another passive information tool that users would only open when highly motivated.</div>
+      </div>
+      <div class="idea-card s6a-el">
+        <img class="case-image" src="assets/case-study/community-pop-up-installation.png" alt="AI-assisted interactive sorting installation concept"/>
+        <div class="idea-title">Idea 03: AI-Assisted Interactive Sorting Installation</div>
+        <div class="idea-body">A public-facing installation concept where users interact with a character guide, scan or present a waste item, receive instant sorting feedback, and are guided toward the correct physical bin. This direction was selected because it connected digital feedback with real-world sorting behaviour.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S6B USER TESTING -->
+<section id="s6b">
+  <div class="insert-section-inner">
+    <div class="insert-section-head">
+      <div>
+        <span class="eyebrow s6b-el">05 — User Testing</span>
+        <h2 class="s-heading s6b-el">Feedback</h2>
+      </div>
+    </div>
+    <div class="testing-charts s6b-el">
+      <div>
+        <div class="chart-title">Participant demographics / n = 32</div>
+        <div class="demo-chart">
+          <div class="demo-pie" aria-label="Participant demographics pie chart"></div>
+          <div class="chart-legend">
+            <div class="chart-legend-row"><span class="legend-dot" style="background:#cbfd85"></span><span>18-24</span><strong>61.5%</strong></div>
+            <div class="chart-legend-row"><span class="legend-dot" style="background:#7eab55"></span><span>25-30</span><strong>26.9%</strong></div>
+            <div class="chart-legend-row"><span class="legend-dot" style="background:rgba(248,243,232,.45)"></span><span>31+</span><strong>7.7%</strong></div>
+            <div class="chart-legend-row"><span class="legend-dot" style="background:rgba(248,243,232,.18)"></span><span>Under 18</span><strong>3.9%</strong></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="chart-title">Preferred learning tools</div>
+        <div class="bar-chart">
+          <div class="bar-row"><span>Posters / visual guides</span><div class="bar-track"><div class="bar-fill" style="width:76.9%"></div></div><strong>76.9%</strong></div>
+          <div class="bar-row"><span>Apps</span><div class="bar-track"><div class="bar-fill" style="width:61.5%"></div></div><strong>61.5%</strong></div>
+          <div class="bar-row"><span>Videos</span><div class="bar-track"><div class="bar-fill" style="width:57.7%"></div></div><strong>57.7%</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="testing-grid">
+      <div class="testing-card s6b-el">
+        <div class="testing-title">Internal testing</div>
+        <div class="testing-body">Internal critique helped refine the character tone and interaction logic. The Wizard of Oz setup showed that Rumi could attract attention, but the original spicy tone needed to become more supportive and community-safe.</div>
+        <div class="testing-list">
+          <div>Keep the character engaging, but make the tone public-friendly.</div>
+          <div>Use feedback to guide the action, not to judge the user.</div>
+        </div>
+      </div>
+    </div>
+    <div class="testing-evidence-grid">
+      <div class="s6b-el"><img class="case-image" src="assets/case-study/internal-test-layout.png" alt="Internal Wizard of Oz test layout"/></div>
+    </div>
+  </div>
+</section>
+
+<section id="s6d" style="background:var(--dark);padding:100px 56px 120px;color:var(--cream)">
+  <div class="insert-section-inner">
+    <div class="insert-section-head">
+      <div>
+        <span class="eyebrow s6d-el">05.1 — External Testing</span>
+        <h2 class="s-heading s6d-el" style="color:var(--cream);margin-top:16px">Testing the flow<br/><em>in public.</em></h2>
+      </div>
+      <p class="insert-section-copy s6d-el">The external test compared two interaction modes: character-guided sorting and interactive video. The videos helped the team see where the experience created momentum and where it interrupted the learning sequence.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px">
+      <div class="testing-card s6d-el">
+        <video src="assets/case-study/external-guided-sorting.mp4" controls muted playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;object-fit:contain;border-radius:18px;border:1px solid rgba(248,243,232,.1);background:#000"></video>
+        <div class="testing-title" style="margin-top:22px">Character-guided sorting</div>
+        <div class="testing-body">Participants learned through Rumi's guidance, then applied the instruction through a physical sorting task. This flow kept the action, feedback, and retention task connected.</div>
+      </div>
+      <div class="testing-card s6d-el">
+        <video src="assets/case-study/external-interactive-video.mp4" controls muted playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;object-fit:contain;border-radius:18px;border:1px solid rgba(248,243,232,.1);background:#000"></video>
+        <div class="testing-title" style="margin-top:22px">Interactive video station</div>
+        <div class="testing-body">The video attracted attention, but when placed inside the active learning flow it created a break between guidance and sorting. It was repositioned as an idle attraction and group engagement tool.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- â•â• S6 THE PRODUCT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="s6" style="background:var(--cream);min-height:100vh;padding:0;display:flex;align-items:stretch">
 
   <!-- Left: text + meta -->
   <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:100px 64px 100px 56px;border-right:1px solid rgba(14,42,28,.1)">
-    <span class="eyebrow s6-el" style="color:var(--mid);display:inline-block;margin-bottom:24px">04 — The Product</span>
-    <h2 class="s6-el" style="font-weight:800;font-size:clamp(42px,5.5vw,80px);line-height:.95;letter-spacing:-.03em;color:var(--dark);margin-bottom:32px">Meet Trash Talk<br/><em style="font-style:normal;color:var(--mid)">with Rumi.</em></h2>
-    <p class="s6-el" style="font-family:'Poppins',sans-serif;font-size:clamp(14px,1.15vw,17px);line-height:1.75;color:rgba(14,42,28,.6);max-width:460px;margin-bottom:48px">An AI mascot that scans your item, identifies its material, and points you to the right bin — in real time. No lectures. No guilt. Just clarity.</p>
+    <span class="eyebrow s6-el" style="color:var(--mid);display:inline-block;margin-bottom:24px">06 — The Product</span>
+    <h2 class="s6-el" style="font-weight:800;font-size:clamp(42px,5.5vw,80px);line-height:.95;letter-spacing:-.03em;color:var(--dark);margin-bottom:32px">A pop-up sorting<br/><em style="font-style:normal;color:var(--mid)">activity with Rumi.</em></h2>
+    <p class="s6-el" style="font-family:'Poppins',sans-serif;font-size:clamp(14px,1.15vw,17px);line-height:1.75;color:rgba(14,42,28,.6);max-width:500px;margin-bottom:48px">Trash Talk is a community-facing interactive waste sorting installation. It combines an AI character, real-time waste classification, physical sorting, and an interactive video attraction screen to turn confusing disposal rules into a public learning activity.</p>
     <!-- Feature pills -->
     <div class="s6-el" style="display:flex;flex-wrap:wrap;gap:12px">
-      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(14,42,28,.07);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Real-time AI scan</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(14,42,28,.07);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Gemini-powered</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(14,42,28,.07);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Zero cognitive load</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(203,253,133,.4);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Kiosk-native</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(14,42,28,.07);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">AI character guidance</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(14,42,28,.07);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Real-time classification</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(14,42,28,.07);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Physical sorting station</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:rgba(203,253,133,.4);color:var(--dark);padding:8px 18px;border-radius:100px;border:1px solid rgba(14,42,28,.12)">Community pop-up</span>
     </div>
   </div>
 
@@ -1294,59 +1697,76 @@ section {
     <!-- Stat callouts -->
     <div style="position:relative;z-index:2;display:flex;gap:40px;margin-top:48px">
       <div style="text-align:center">
-        <div style="font-weight:800;font-size:clamp(28px,3vw,40px);color:var(--dark);letter-spacing:-.02em">3s</div>
-        <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(14,42,28,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Avg. scan time</div>
+        <div style="font-weight:800;font-size:clamp(28px,3vw,40px);color:var(--dark);letter-spacing:-.02em">AI</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(14,42,28,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Character support</div>
       </div>
       <div style="width:1px;background:rgba(14,42,28,.1)"></div>
       <div style="text-align:center">
-        <div style="font-weight:800;font-size:clamp(28px,3vw,40px);color:var(--dark);letter-spacing:-.02em">94%</div>
-        <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(14,42,28,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Sort accuracy</div>
+        <div style="font-weight:800;font-size:clamp(28px,3vw,40px);color:var(--dark);letter-spacing:-.02em">Sort</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(14,42,28,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Physical action</div>
       </div>
       <div style="width:1px;background:rgba(14,42,28,.1)"></div>
       <div style="text-align:center">
-        <div style="font-weight:800;font-size:clamp(28px,3vw,40px);color:var(--dark);letter-spacing:-.02em">4</div>
-        <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(14,42,28,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Bin categories</div>
+        <div style="font-weight:800;font-size:clamp(28px,3vw,40px);color:var(--dark);letter-spacing:-.02em">Video</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(14,42,28,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Attraction mode</div>
       </div>
     </div>
   </div>
 
 </section>
 
+<section id="s6c" style="background:var(--cream);padding:90px 56px 110px">
+  <div style="width:100%;max-width:none;margin:0">
+    <div class="experience-head" style="display:flex;justify-content:space-between;gap:48px;align-items:flex-end;margin-bottom:42px">
+      <div>
+        <span class="eyebrow s6c-el">06.1 — Experience Flow</span>
+        <h2 class="s-heading s6c-el" style="color:var(--dark);margin-top:16px">From attraction<br/><em style="font-style:normal;color:var(--mid)">to action.</em></h2>
+      </div>
+      <p class="s6c-el" style="font-family:'Poppins',sans-serif;font-size:clamp(14px,1.15vw,17px);line-height:1.8;color:rgba(14,42,28,.62);max-width:450px">The final concept works as a portable learning setup: it draws people in, classifies real objects, gives character feedback, and asks users to physically complete the sorting action.</p>
+    </div>
+    <div class="experience-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <figure class="s6c-el experience-primary experience-figure"><img class="case-image light" src="assets/case-study/prototype-flow.png" alt="Prototype system flow"/><figcaption class="experience-caption">Prototype flow map</figcaption></figure>
+      <figure class="s6c-el experience-figure"><img class="case-image light" src="assets/case-study/community-pop-up-installation.png" alt="Community pop-up installation setup"/><figcaption class="experience-caption">Community pop-up setup</figcaption></figure>
+      <figure class="s6c-el experience-figure"><img class="case-image light" src="assets/case-study/rumi-character-feedback.png" alt="Rumi character feedback day and night mode"/><figcaption class="experience-caption">Rumi character feedback</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- â•â• S7 IA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="s7" style="background:var(--dark);padding:80px 56px;display:flex;align-items:flex-start">
   <div style="width:100%">
     <div style="margin-bottom:64px">
-      <span class="eyebrow s7-el" style="display:inline-block">05 — User Flow</span>
-      <h2 class="s-heading s7-el" style="color:var(--cream);margin-top:16px">How Rumi<br/><em>guides you.</em></h2>
+      <span class="eyebrow s7-el" style="display:inline-block">07 — User Flow</span>
+      <h2 class="s-heading s7-el" style="color:var(--cream);margin-top:16px">How the activity<br/><em>unfolds.</em></h2>
     </div>
     <!-- IA Flow SVG diagram -->
     <div id="ia-flow" style="position:relative;width:100%;overflow-x:auto">
       <div style="display:flex;align-items:center;gap:0;min-width:700px;padding:40px 0">
         <!-- Step nodes -->
-        <div class="ia-node" data-i="0"><div class="ia-dot"></div><div class="ia-label">Idle</div><div class="ia-desc">Rumi waits.<br/>Ambient animation.</div></div>
+        <div class="ia-node" data-i="0"><div class="ia-dot"></div><div class="ia-label">Attract</div><div class="ia-desc">Looping video<br/>draws attention.</div></div>
         <div class="ia-arrow">→</div>
-        <div class="ia-node" data-i="1"><div class="ia-dot"></div><div class="ia-label">Item in Frame</div><div class="ia-desc">Camera detects<br/>object presence.</div></div>
+        <div class="ia-node" data-i="1"><div class="ia-dot"></div><div class="ia-label">Join</div><div class="ia-desc">User steps into<br/>the pop-up station.</div></div>
         <div class="ia-arrow">→</div>
-        <div class="ia-node" data-i="2"><div class="ia-dot" style="background:var(--lime);box-shadow:0 0 20px rgba(203,253,133,.4)"></div><div class="ia-label">AI Scan</div><div class="ia-desc">Gemini identifies<br/>material composition.</div></div>
+        <div class="ia-node" data-i="2"><div class="ia-dot" style="background:var(--lime);box-shadow:0 0 20px rgba(203,253,133,.4)"></div><div class="ia-label">Classify</div><div class="ia-desc">Computer vision reads<br/>the waste item.</div></div>
         <div class="ia-arrow">→</div>
-        <div class="ia-node" data-i="3"><div class="ia-dot"></div><div class="ia-label">Result</div><div class="ia-desc">Category shown.<br/>Confidence displayed.</div></div>
+        <div class="ia-node" data-i="3"><div class="ia-dot"></div><div class="ia-label">Feedback</div><div class="ia-desc">Rumi explains<br/>the right bin.</div></div>
         <div class="ia-arrow">→</div>
-        <div class="ia-node" data-i="4"><div class="ia-dot"></div><div class="ia-label">Arrow Guides</div><div class="ia-desc">Animated arrow points<br/>to the correct bin.</div></div>
+        <div class="ia-node" data-i="4"><div class="ia-dot"></div><div class="ia-label">Sort</div><div class="ia-desc">User completes<br/>the physical action.</div></div>
         <div class="ia-arrow">→</div>
-        <div class="ia-node" data-i="5"><div class="ia-dot"></div><div class="ia-label">Learn</div><div class="ia-desc">Material explanation.<br/>Rumi reacts.</div></div>
+        <div class="ia-node" data-i="5"><div class="ia-dot"></div><div class="ia-label">Reflect</div><div class="ia-desc">The result becomes<br/>a shared learning moment.</div></div>
       </div>
     </div>
     <!-- Secondary: two paths -->
     <div style="margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:640px">
       <div class="ia-path-card s7-el" >
         <div style="font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);opacity:.6;margin-bottom:10px">Correct bin</div>
-        <div style="font-weight:800;font-size:18px;color:var(--cream);margin-bottom:8px">✓ Confirmed</div>
-        <div style="font-family:'Poppins',sans-serif;font-size:16px;color:rgba(248,243,232,.5);line-height:1.7">Rumi celebrates. Item logged to history. +1 correct sort.</div>
+        <div style="font-weight:800;font-size:18px;color:var(--cream);margin-bottom:8px">✓ Reinforce</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:16px;color:rgba(248,243,232,.5);line-height:1.7">Rumi confirms the action and turns the correct sort into a small public success moment.</div>
       </div>
       <div class="ia-path-card s7-el" >
         <div style="font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,243,232,.4);margin-bottom:10px">Wrong bin detected</div>
         <div style="font-weight:800;font-size:18px;color:var(--cream);margin-bottom:8px">↩ Redirect</div>
-        <div style="font-family:'Poppins',sans-serif;font-size:16px;color:rgba(248,243,232,.5);line-height:1.7">Rumi intercepts with a trash talk. Arrow re-points. Second chance.</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:16px;color:rgba(248,243,232,.5);line-height:1.7">If the user hesitates or sorts incorrectly, Rumi responds with supportive correction instead of judgment.</div>
       </div>
     </div>
   </div>
@@ -1408,7 +1828,7 @@ section {
       <!-- RIGHT: swapping content panel -->
       <div id="s8-right">
         <div class="s8-panel" id="s8-panel-0">
-          <div class="s8-panel-img"><img src="assets/ui-screens/step-01-idle.jpg" loading="lazy" alt="Step 1"/></div>
+          <div class="s8-panel-img"><img src="assets/ui-screens/step-01-ui.png" loading="lazy" alt="Step 1"/></div>
           <div class="s8-panel-text">
             <div class="s8-panel-eyebrow">01 / 05</div>
             <div class="s8-panel-title">Item enters<br/>the frame.</div>
@@ -1455,7 +1875,7 @@ section {
 
 <section id="s9" style="background:var(--cream);min-height:100vh;padding:120px 56px">
   <div style="margin-bottom:64px">
-    <span class="eyebrow s9-el" style="color:var(--mid)display:inline-block">06 — Visual System</span>
+    <span class="eyebrow s9-el" style="color:var(--mid)display:inline-block">08 — Visual System</span>
     <h2 class="s-heading s9-el" style="color:var(--dark);margin-top:16px">Design<br/><em style="font-style:normal;color:var(--mid)">language.</em></h2>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
@@ -1513,82 +1933,6 @@ section {
 
 
 <!-- â•â• S11 AI DEMO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-<section id="s11" style="background:var(--black);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 56px">
-  <div style="text-align:center;margin-bottom:48px">
-    <span class="eyebrow s11-el" style="display:inline-block">08 — Live Demo</span>
-    <h2 class="s-heading s11-el" style="color:var(--cream);margin-top:16px">Try it<br/><em>yourself.</em></h2>
-    <p class="s11-el" style="font-family:'Poppins',sans-serif;font-size:14px;color:rgba(248,243,232,.4);margin-top:16px">Powered by Gemini · Real-time material detection</p>
-  </div>
-  <div id="demo-frame-wrap" class="s11-el" style="width:100%;max-width:1100px;border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(248,243,232,.08);box-shadow:0 40px 120px rgba(0,0,0,.6)scale(.97)">
-    <div style="background:rgba(248,243,232,.05);padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(248,243,232,.06)">
-      <div style="width:10px;height:10px;border-radius:50%;background:rgba(248,243,232,.15)"></div>
-      <div style="width:10px;height:10px;border-radius:50%;background:rgba(248,243,232,.15)"></div>
-      <div style="width:10px;height:10px;border-radius:50%;background:rgba(203,253,133,.3)"></div>
-      <div style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.3);margin-left:8px">raccoon-recycler-kiosk-836290125801.us-east1.run.app</div>
-    </div>
-    <iframe id="demo-iframe" src="" data-src="https://raccoon-recycler-kiosk-836290125801.us-east1.run.app" style="width:100%;height:680px;border:none;display:block" title="Trash Talk with Rumi — Live Demo"></iframe>
-  </div>
-</section>
-
-<!-- â•â• S12 USER TESTING â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-<section id="s12" style="background:var(--dark);min-height:100vh;padding:120px 56px">
-  <div style="margin-bottom:64px">
-    <span class="eyebrow s12-el" style="display:inline-block">09 — User Testing</span>
-    <h2 class="s-heading s12-el" style="color:var(--cream);margin-top:16px">Three conditions.<br/><em>One clear answer.</em></h2>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px">
-    <div class="test-card s12-el" data-condition="clear" >
-      <div class="test-vis" style="height:180px;border-radius:var(--r-md);background:rgba(203,253,133,.08);border:1px solid rgba(203,253,133,.15);display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative;overflow:hidden">
-        <img src="assets/hero/aluminium_can-_350ml.glb" alt="" style="display:none"/>
-        <div style="font-size:48px;filter:none;transition:filter .4s">🥫</div>
-        <div style="position:absolute;bottom:12px;left:12px;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);opacity:.7">Full visibility</div>
-      </div>
-      <div style="font-weight:800;font-size:22px;color:var(--cream);margin-bottom:4px">CLEAR</div>
-      <div style="font-family:'Poppins',sans-serif;font-size:12px;color:rgba(248,243,232,.4);margin-bottom:24px">Item shown in normal lighting</div>
-      <div class="test-stat" style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.5)">Correct Sort Rate</span><span style="font-weight:800;font-size:11px;color:var(--lime)" data-target="87">0%</span></div>
-        <div style="height:4px;border-radius:2px;background:rgba(248,243,232,.08)"><div class="test-bar" style="height:100%;border-radius:2px;background:var(--lime);width:0%;transition:width 1.2s var(--ease-out)"></div></div>
-      </div>
-      <div class="test-stat">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.5)">Avg Decision Time</span><span style="font-weight:800;font-size:11px;color:var(--cream)">4.2s</span></div>
-      </div>
-    </div>
-    <div class="test-card s12-el" data-condition="blur" >
-      <div class="test-vis" style="height:180px;border-radius:var(--r-md);background:rgba(248,243,232,.04);border:1px solid rgba(248,243,232,.08);display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative;overflow:hidden">
-        <div style="font-size:48px;filter:blur(3px)">🥫</div>
-        <div style="position:absolute;bottom:12px;left:12px;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,243,232,.4)">Label obscured</div>
-      </div>
-      <div style="font-weight:800;font-size:22px;color:var(--cream);margin-bottom:4px">BLUR</div>
-      <div style="font-family:'Poppins',sans-serif;font-size:12px;color:rgba(248,243,232,.4);margin-bottom:24px">Label deliberately obscured</div>
-      <div class="test-stat" style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.5)">Correct Sort Rate</span><span style="font-weight:800;font-size:11px;color:#F0C060" data-target="61">0%</span></div>
-        <div style="height:4px;border-radius:2px;background:rgba(248,243,232,.08)"><div class="test-bar" style="height:100%;border-radius:2px;background:#F0C060;width:0%;transition:width 1.2s var(--ease-out)"></div></div>
-      </div>
-      <div class="test-stat">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.5)">Avg Decision Time</span><span style="font-weight:800;font-size:11px;color:var(--cream)">8.7s</span></div>
-      </div>
-    </div>
-    <div class="test-card s12-el" data-condition="blind" >
-      <div class="test-vis" style="height:180px;border-radius:var(--r-md);background:rgba(248,243,232,.02);border:1px solid rgba(248,243,232,.05);display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative;overflow:hidden">
-        <div style="font-size:48px;filter:brightness(0)">🥫</div>
-        <div style="position:absolute;bottom:12px;left:12px;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,243,232,.25)">Silhouette only</div>
-      </div>
-      <div style="font-weight:800;font-size:22px;color:var(--cream);margin-bottom:4px">BLIND</div>
-      <div style="font-family:'Poppins',sans-serif;font-size:12px;color:rgba(248,243,232,.4);margin-bottom:24px">Item shown as silhouette only</div>
-      <div class="test-stat" style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.5)">Correct Sort Rate</span><span style="font-weight:800;font-size:11px;color:rgba(248,243,232,.5)" data-target="23">0%</span></div>
-        <div style="height:4px;border-radius:2px;background:rgba(248,243,232,.08)"><div class="test-bar" style="height:100%;border-radius:2px;background:rgba(248,243,232,.3);width:0%;transition:width 1.2s var(--ease-out)"></div></div>
-      </div>
-      <div class="test-stat">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-family:'Poppins',sans-serif;font-size:11px;color:rgba(248,243,232,.5)">Avg Decision Time</span><span style="font-weight:800;font-size:11px;color:var(--cream)">12.1s</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="s12-el" style="border-top:1px solid rgba(248,243,232,.08);padding-top:40px">
-    <p style="font-weight:800;font-size:clamp(20px,2vw,30px);color:var(--cream);max-width:640px;line-height:1.3">Without visual guidance, correct sorting dropped <em style="font-style:normal;color:var(--lime)">64 percentage points.</em> Rumi provides what labels cannot.</p>
-  </div>
-</section>
-
 <!-- â•â• S13 CAMPAIGN â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="s14" style="background:var(--cream);min-height:100vh;padding:120px 56px;display:flex;align-items:center">
   <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
@@ -1671,7 +2015,7 @@ section {
         <div style="font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,243,232,.35);margin-bottom:16px">Team</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <span class="tag">Slay</span>
-          <span style="font-family:'Poppins',sans-serif;font-size:12px;color:rgba(248,243,232,.4);padding-top:5px">CDM DMED 520 · Fall 2024</span>
+          <span style="font-family:'Poppins',sans-serif;font-size:12px;color:rgba(248,243,232,.4);padding-top:5px">CDM DMED 520 · Winter 2026</span>
         </div>
       </div>
     </div>
@@ -1684,6 +2028,7 @@ section {
 <script>
 // â”€â”€ S6 THE PRODUCT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 (function(){
+  if (!document.querySelector('#s6-eye, #s6-head, #s6-img, #s6-sub')) return;
   const tl = gsap.timeline({ scrollTrigger:{ trigger:'#s6', start:'top 70%', once:true } });
   tl.to('#s6-eye',  { opacity:.7, y:0, duration:.7, ease:'power3.out' })
     .to('#s6-head', { opacity:1,  y:0, duration:.9, ease:'power3.out' }, '-=.4')
@@ -1715,49 +2060,22 @@ section {
   });
 })();
 
-// â”€â”€ S11 AI DEMO — lazy load iframe â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-ScrollTrigger.create({
-  trigger: '#s11',
-  start: 'top 60%',
-  once: true,
-  onEnter: () => {
-    const iframe = document.getElementById('demo-iframe');
-    if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
-  }
-});
+// S6A / S6B / S6D / S6C inserts
 (function(){
-  gsap.from('.s11-el', {
-    scrollTrigger:{ trigger:'#s11', start:'top 75%', once:true },
-    opacity:0, y:24, scale:1, duration:.9, ease:'power3.out', stagger:.14
-  });
-})();
-
-// â”€â”€ S12 USER TESTING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-(function(){
-  gsap.from('.s12-el', {
-    scrollTrigger:{ trigger:'#s12', start:'top 75%', once:true },
-    opacity:0, y:24, duration:.8, ease:'power3.out', stagger:.14,
-    onComplete: () => {
-      // Animate bars + count-up numbers
-      document.querySelectorAll('.test-bar').forEach((bar, i) => {
-        const targets = [87, 61, 23];
-        gsap.to(bar, { width: targets[i] + '%', duration:1.2, ease:'power3.out', delay: i * .12 });
-      });
-      document.querySelectorAll('[data-target]').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        gsap.to({ val:0 }, {
-          val: target,
-          duration:1.4,
-          ease:'power2.out',
-          onUpdate: function(){ el.textContent = Math.round(this.targets()[0].val) + '%'; }
-        });
-      });
-    }
+  ['s6a', 's6b', 's6d', 's6c'].forEach(id => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    gsap.from('#' + id + ' .' + id + '-el', {
+      scrollTrigger:{ trigger:'#' + id, start:'top 75%', once:true },
+      opacity:0, y:28, duration:.8, ease:'power3.out', stagger:.1
+    });
   });
 })();
 
 // â”€â”€ S13 CAMPAIGN poster drag â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 (function(){
+  const s13 = document.getElementById('s13');
+  if (!s13) return;
   gsap.from('.s13-el', {
     scrollTrigger:{ trigger:'#s13', start:'top 75%', once:true },
     opacity:0, y:24, duration:.8, ease:'power3.out', stagger:.1
@@ -2429,7 +2747,6 @@ function heroReady() {
     }, null, 1.1);
 
     // Meta + scroll hint after pull-back settles
-    pullTl.to('#hero-meta',        { opacity: 1, duration: .6, ease: 'power2.out' }, 1.4);
     pullTl.to('#hero-scroll-hint', { opacity: 1, duration: .5, ease: 'power2.out' }, 1.7);
 
 
@@ -2839,7 +3156,7 @@ gsap.ticker.add((time) => {
         trigger: '#s3',
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1.45,
+        scrub: 2.05,
       },
     });
 
@@ -2869,21 +3186,21 @@ gsap.ticker.add((time) => {
     });
 
     items.forEach((item, index) => {
-      const focusStart = 2.05 + index * 2.2;
+      const focusStart = 2.25 + index * 3.05;
       const label = labels[index];
 
       s3Timeline.to(cameraState, {
         progress: focusStops[index],
-        duration: 1.78,
+        duration: 2.15,
         ease: 'sine.inOut',
       }, focusStart);
 
       labels.forEach((otherLabel, otherIndex) => {
         s3Timeline.to(otherLabel, {
           opacity: otherIndex === index ? 1 : 0,
-          duration: otherIndex === index ? 0.34 : 0.22,
+          duration: otherIndex === index ? 0.5 : 0.36,
           ease: 'power2.out',
-        }, focusStart + 0.46);
+        }, focusStart + 0.72);
       });
 
       groups.forEach((group, groupIndex) => {
@@ -2892,21 +3209,21 @@ gsap.ticker.add((time) => {
           x: scale,
           y: scale,
           z: scale,
-          duration: 0.86,
+          duration: 1.1,
           ease: 'sine.inOut',
-        }, focusStart + 0.12);
+        }, focusStart + 0.2);
       });
 
       s3Timeline.to(label, {
         opacity: 0,
-        duration: 0.45,
+        duration: 0.62,
         ease: 'power2.out',
-      }, focusStart + 2.42);
+      }, focusStart + 3.45);
     });
 
     s3Timeline.to(cameraState, {
       progress: 1,
-      duration: 1.75,
+      duration: 2.15,
       ease: 'sine.inOut',
     }, '+=0.3');
     groups.forEach((group) => {
