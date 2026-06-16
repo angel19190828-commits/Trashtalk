@@ -436,6 +436,33 @@ section {
 }
 .context-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .context-tags .tag { color: var(--dark); background: rgba(14,42,28,.06); border-color: rgba(14,42,28,.18); }
+.overview-role {
+  margin: -16px 0 28px;
+  max-width: 520px;
+}
+.overview-role-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(14,42,28,.45);
+  margin-bottom: 10px;
+}
+.overview-role-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.overview-role-list span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--dark);
+  padding: 9px 12px;
+  border: 1px solid rgba(14,42,28,.16);
+  border-radius: 999px;
+  background: rgba(142,177,89,.12);
+}
 
 .context-right {
   display: grid;
@@ -1476,12 +1503,15 @@ section {
       <span class="eyebrow">00 — Overview</span>
       <h1 class="project-title">Trash Talk<br/><em>with Rumi</em></h1>
       <p class="context-desc">A community-facing waste sorting activity that combines an AI character, real-time item recognition, physical sorting, and public engagement. Designed as a pop-up learning installation, it helps people act with confidence at the moment of disposal.</p>
-      <div class="context-tags">
-        <span class="tag">Product Design</span>
-        <span class="tag">AI Interaction</span>
-        <span class="tag">Motion Design</span>
-        <span class="tag">UX Research</span>
-        <span class="tag">3D Assets</span>
+      <div class="overview-role">
+        <div class="overview-role-label">My Achieve</div>
+        <div class="overview-role-list">
+          <span>Product Design</span>
+          <span>AI Interaction</span>
+          <span>Motion Design</span>
+          <span>UX Research</span>
+          <span>3D Assets</span>
+        </div>
       </div>
     </div>
     <div class="context-right">
@@ -1513,7 +1543,7 @@ section {
   <div class="research-grid">
     <div class="research-left">
       <span class="eyebrow">02 — Research</span>
-      <h2 class="s-heading">How we<br/>found it.</h2>
+      <h2 class="s-heading">How we found it</h2>
     </div>
     <div class="research-methods">
       <div class="method-item">
@@ -2022,7 +2052,7 @@ section {
   <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
     <div>
       <span class="eyebrow s16-el" style="display:inline-block">13 — Reflection</span>
-      <h2 class="s-heading s16-el" style="color:var(--cream);margin-top:16px">What we<br/><em>learned.</em></h2>
+      <h2 class="s-heading s16-el" style="color:var(--cream);margin-top:16px">What I<br/><em>learned.</em></h2>
       <p class="s16-el" style="font-family:'Poppins',sans-serif;font-size:clamp(14px,1.2vw,17px);line-height:1.8;color:rgba(248,243,232,.55);max-width:440px;margin-top:24px">This project taught us that behaviour change isn't about information — it's about reducing friction at the exact moment of decision.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:0">
