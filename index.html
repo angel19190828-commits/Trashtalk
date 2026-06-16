@@ -231,6 +231,30 @@ section {
   z-index: 2;
   filter: blur(8px);
 }
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0.72;
+}
+.dot-grid__wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.dot-grid__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
 /* CRT scanline + vignette overlay */
 #crt-overlay {
   position: absolute;
@@ -1426,8 +1450,11 @@ section {
 
 <!-- â•â• S1 CHAOS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="s1">
-  <div class="hero-bg-word">TRASH</div>
-  <div class="hero-bg-word">TALK</div>
+  <div id="hero-dot-grid" class="dot-grid" aria-hidden="true">
+    <div class="dot-grid__wrap">
+      <canvas class="dot-grid__canvas"></canvas>
+    </div>
+  </div>
   <canvas id="hero-canvas"></canvas>
   <div id="crt-overlay" aria-hidden="true"></div>
   <div id="hero-text-overlay">
@@ -2137,6 +2164,261 @@ section {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <script>
 gsap.registerPlugin(ScrollTrigger, Draggable);
+
+// Hero DotGrid background, adapted from React Bits for this static page.
+(function(){
+  const root = document.getElementById('hero-dot-grid');
+  if (!root) return;
+
+  const wrap = root.querySelector('.dot-grid__wrap');
+  const canvas = root.querySelector('.dot-grid__canvas');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const settings = {
+    dotSize: 1.35,
+    gap: 22,
+    baseColor: '#31533F',
+    activeColor: '#CBFD85',
+    proximity: 150,
+    speedTrigger: 100,
+    shockRadius: 230,
+    shockStrength: 5,
+    maxSpeed: 5000,
+    resistance: 750,
+    returnDuration: 1.5
+  };
+
+  let dots = [];
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let pointer = {
+    x: -9999,
+    y: -9999,
+    vx: 0,
+    vy: 0,
+    speed: 0,
+    lastTime: 0,
+    lastX: 0,
+    lastY: 0,
+    inside: false
+  };
+  let visible = true;
+  let rafId = null;
+
+  function hexToRgb(hex) {
+    const clean = hex.replace('#', '');
+    const bigint = parseInt(clean, 16);
+    return {
+      r: (bigint >> 16) & 255,
+      g: (bigint >> 8) & 255,
+      b: bigint & 255
+    };
+  }
+
+  const baseRgb = hexToRgb(settings.baseColor);
+  const activeRgb = hexToRgb(settings.activeColor);
+
+  function mixColor(t) {
+    const clamped = Math.max(0, Math.min(1, t));
+    const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * clamped);
+    const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * clamped);
+    const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * clamped);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
+  function resize() {
+    const rect = wrap.getBoundingClientRect();
+    width = Math.max(1, rect.width);
+    height = Math.max(1, rect.height);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const cols = Math.ceil(width / settings.gap) + 2;
+    const rows = Math.ceil(height / settings.gap) + 2;
+    dots = [];
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        dots.push({
+          cx: x * settings.gap - settings.gap * 0.5,
+          cy: y * settings.gap - settings.gap * 0.5,
+          xOffset: 0,
+          yOffset: 0,
+          pulse: 0,
+          _inertiaApplied: false
+        });
+      }
+    }
+  }
+
+  function updatePointer(e) {
+    const now = performance.now();
+    const dt = pointer.lastTime ? now - pointer.lastTime : 16;
+    const mx = e.clientX - pointer.lastX;
+    const my = e.clientY - pointer.lastY;
+    let vx = (mx / Math.max(dt, 1)) * 1000;
+    let vy = (my / Math.max(dt, 1)) * 1000;
+    let speed = Math.hypot(vx, vy);
+    if (speed > settings.maxSpeed) {
+      const scale = settings.maxSpeed / speed;
+      vx *= scale;
+      vy *= scale;
+      speed = settings.maxSpeed;
+    }
+
+    pointer.lastTime = now;
+    pointer.lastX = e.clientX;
+    pointer.lastY = e.clientY;
+    pointer.vx = vx;
+    pointer.vy = vy;
+    pointer.speed = speed;
+
+    const rect = root.getBoundingClientRect();
+    pointer.inside =
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom;
+
+    if (pointer.inside) {
+      pointer.x = e.clientX - rect.left;
+      pointer.y = e.clientY - rect.top;
+      applyPointerInertia();
+    } else {
+      pointer.x = -9999;
+      pointer.y = -9999;
+    }
+  }
+
+  function returnDot(dot) {
+    gsap.to(dot, {
+      xOffset: 0,
+      yOffset: 0,
+      pulse: 0,
+      duration: settings.returnDuration,
+      ease: 'elastic.out(1,0.75)',
+      overwrite: true,
+      onComplete: function(){ dot._inertiaApplied = false; }
+    });
+  }
+
+  function applyPointerInertia() {
+    if (reduceMotion || pointer.speed <= settings.speedTrigger) return;
+
+    dots.forEach(dot => {
+      const dist = Math.hypot(dot.cx - pointer.x, dot.cy - pointer.y);
+      if (dist >= settings.proximity || dot._inertiaApplied) return;
+
+      const falloff = Math.max(0, 1 - dist / settings.proximity);
+      const rawX = (dot.cx - pointer.x + pointer.vx * 0.005) * falloff;
+      const rawY = (dot.cy - pointer.y + pointer.vy * 0.005) * falloff;
+      const damp = Math.max(0.22, Math.min(0.75, 520 / settings.resistance));
+      const xOffset = Math.max(-90, Math.min(90, rawX * damp));
+      const yOffset = Math.max(-90, Math.min(90, rawY * damp));
+
+      dot._inertiaApplied = true;
+      gsap.killTweensOf(dot);
+      gsap.to(dot, {
+        xOffset: xOffset,
+        yOffset: yOffset,
+        pulse: 1,
+        duration: 0.32,
+        ease: 'power3.out',
+        overwrite: true,
+        onComplete: function(){ returnDot(dot); }
+      });
+    });
+  }
+
+  function releasePointer() {
+    pointer.inside = false;
+    pointer.x = -9999;
+    pointer.y = -9999;
+  }
+
+  function shock(e) {
+    if (reduceMotion) return;
+    const rect = root.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
+    const sx = e.clientX - rect.left;
+    const sy = e.clientY - rect.top;
+
+    dots.forEach(dot => {
+      const dx = dot.cx - sx;
+      const dy = dot.cy - sy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (!dist || dist > settings.shockRadius || dot._inertiaApplied) return;
+
+      const falloff = Math.max(0, 1 - dist / settings.shockRadius);
+      const force = falloff * settings.shockStrength;
+      const nx = dx / dist;
+      const ny = dy / dist;
+      const xOffset = Math.max(-120, Math.min(120, dx * force));
+      const yOffset = Math.max(-120, Math.min(120, dy * force));
+
+      dot._inertiaApplied = true;
+      gsap.killTweensOf(dot);
+      gsap.to(dot, {
+        xOffset: xOffset || nx * settings.gap,
+        yOffset: yOffset || ny * settings.gap,
+        pulse: 1,
+        duration: 0.36,
+        ease: 'power3.out',
+        overwrite: true,
+        onComplete: function(){ returnDot(dot); }
+      });
+    });
+  }
+
+  function draw() {
+    if (visible) {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < dots.length; i++) {
+        const dot = dots[i];
+        const dx = dot.cx - pointer.x;
+        const dy = dot.cy - pointer.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const hover = pointer.inside ? Math.max(0, 1 - dist / settings.proximity) : 0;
+        const glow = Math.max(hover, dot.pulse * 0.9);
+        const push = reduceMotion ? 0 : hover * 8;
+        const x = dot.cx + dot.xOffset + (dist ? (dx / dist) * push : 0);
+        const y = dot.cy + dot.yOffset + (dist ? (dy / dist) * push : 0);
+        const radius = settings.dotSize + glow * 1.8;
+
+        ctx.beginPath();
+        ctx.fillStyle = mixColor(glow);
+        ctx.globalAlpha = 0.34 + glow * 0.66;
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    rafId = requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('mousemove', updatePointer, { passive: true });
+  window.addEventListener('mouseleave', releasePointer);
+  window.addEventListener('click', shock);
+
+  const resizeObserver = new ResizeObserver(resize);
+  resizeObserver.observe(wrap);
+
+  const io = new IntersectionObserver(entries => {
+    visible = entries.some(entry => entry.isIntersecting);
+  }, { threshold: 0.02 });
+  io.observe(root);
+
+  rafId = requestAnimationFrame(draw);
+})();
 
 // â”€â”€ Lenis smooth scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 if (typeof Lenis !== 'undefined') {
